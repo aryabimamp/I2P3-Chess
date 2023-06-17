@@ -11,9 +11,56 @@
  * 
  * @return int 
  */
+
+const int pv=100;
+const int rv=500; 
+const int nv=300;
+const int bv=300;
+const int qv=900;
+const int kv;
+
 int State::evaluate(){
   // [TODO] design your own evaluation function
-  return 0;
+  int eval = 0;
+  for(int i=0; i<BOARD_H; i+=1){
+    for(int j=0; j<BOARD_W; j+=1){
+      if((now_piece = this->board.board[0][i][j])){
+        if(std::string(piece_table[0][now_piece]) == "wP"){
+          eval += pv;
+        }
+        else if(std::string(piece_table[0][now_piece]) == "wR"){
+          eval += rv;
+        }
+        else if(std::string(piece_table[0][now_piece]) == "wn"){
+          eval += nv;
+        }
+        else if(std::string(piece_table[0][now_piece]) == "wB"){
+          eval += bv;
+        }
+        else if(std::string(piece_table[0][now_piece]) == "wQ"){
+          eval += qv;
+        }
+      }else if((now_piece = this->board.board[1][i][j])){
+        if(std::string(piece_table[1][now_piece]) == "bP"){
+          eval -= pv;
+        }
+        else if(std::string(piece_table[1][now_piece]) == "bR"){
+          eval -= rv;
+        }
+        else if(std::string(piece_table[1][now_piece]) == "bn"){
+          eval -= nv;
+        }
+        else if(std::string(piece_table[1][now_piece]) == "bB"){
+          eval -= bv;
+        }
+        else if(std::string(piece_table[1][now_piece]) == "bQ"){
+          eval -= qv;
+        }
+      }
+    }
+  }
+  std::cout << "horse" << eval;
+  return eval;
 }
 
 

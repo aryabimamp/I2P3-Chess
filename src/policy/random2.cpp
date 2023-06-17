@@ -14,7 +14,7 @@
 Move Random2::get_move(State *state, int depth){
   if(!state->legal_actions.size())
     state->get_legal_actions();
-  
+
   auto actions = state->legal_actions;
   int k=depth;
   for(int i=0;i<depth;i++){
