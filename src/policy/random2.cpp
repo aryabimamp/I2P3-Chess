@@ -1,4 +1,5 @@
 #include <cstdlib>
+#include <iostream>
 
 #include "../state/state.hpp"
 #include "./random2.hpp"
@@ -11,14 +12,60 @@
  * @param depth You may need this for other policy
  * @return Move 
  */
+
+int value;
+
+int minimax(State* node, int depth, int max){
+  if(depth==0){
+    return node->evaluate();
+  }
+
+  if(max==1){
+    value = -1000;
+    if(!node->legal_actions.size()){
+      node->get_legal_actions();
+    }
+    auto legal = node->legal_actions;
+    
+    for(auto i : legal){
+      State* changestate = node->next_state(i);
+      value = std::max(value, minimax(changestate,depth-1,0));
+    }
+    return value;
+  }
+
+  else if(max==0){
+    value = 1000;
+    if(!node->legal_actions.size()){
+      node->get_legal_actions();
+    }
+    auto legal = node->legal_actions;
+    for(auto i : legal){
+      State* changestate = node->next_state(i);
+      value = std::min(value, minimax(changestate,depth-1,1));
+    }
+    return value;
+  }
+
+}
+
 Move Random2::get_move(State *state, int depth){
   if(!state->legal_actions.size())
     state->get_legal_actions();
-
+    
   auto actions = state->legal_actions;
-  int k=depth;
-  for(int i=0;i<depth;i++){
-    k=rand()/k;
+Move k;
+int w = -100;
+int ev;
+for(auto i : actions){
+  State* changestate = state->next_state(i);
+  ev = minimax(changestate,depth,1);
+
+  if(ev >= w){
+    w = ev;
+    k = i;
   }
-  return actions[k%actions.size()];
+
+}
+  return k;
 }

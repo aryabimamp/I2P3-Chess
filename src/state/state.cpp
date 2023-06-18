@@ -12,55 +12,90 @@
  * @return int 
  */
 
-const int pv=100;
-const int rv=500; 
-const int nv=300;
-const int bv=300;
-const int qv=900;
-const int kv;
+const char piece_table[2][7][5] = {
+  {" ", "♙", "♖", "♘", "♗", "♕", "♔"},
+  {" ", "♟", "♜", "♞", "♝", "♛", "♚"}
+};
+
+const int pv=1;
+const int rv=6;
+const int nv=7;
+const int bv=8;
+const int qv=20;
+const int kv=100;
 
 int State::evaluate(){
+  
   // [TODO] design your own evaluation function
-  int eval = 0;
+
+  int weval=0,beval=0;
+
+  auto self_board = this->board.board[0];
+  auto oppn_board = this->board.board[1];
+  
+  int now_piece, oppn_piece;
+
   for(int i=0; i<BOARD_H; i+=1){
     for(int j=0; j<BOARD_W; j+=1){
-      if((now_piece = this->board.board[0][i][j])){
-        if(std::string(piece_table[0][now_piece]) == "wP"){
-          eval += pv;
-        }
-        else if(std::string(piece_table[0][now_piece]) == "wR"){
-          eval += rv;
-        }
-        else if(std::string(piece_table[0][now_piece]) == "wn"){
-          eval += nv;
-        }
-        else if(std::string(piece_table[0][now_piece]) == "wB"){
-          eval += bv;
-        }
-        else if(std::string(piece_table[0][now_piece]) == "wQ"){
-          eval += qv;
-        }
-      }else if((now_piece = this->board.board[1][i][j])){
-        if(std::string(piece_table[1][now_piece]) == "bP"){
-          eval -= pv;
-        }
-        else if(std::string(piece_table[1][now_piece]) == "bR"){
-          eval -= rv;
-        }
-        else if(std::string(piece_table[1][now_piece]) == "bn"){
-          eval -= nv;
-        }
-        else if(std::string(piece_table[1][now_piece]) == "bB"){
-          eval -= bv;
-        }
-        else if(std::string(piece_table[1][now_piece]) == "bQ"){
-          eval -= qv;
+      now_piece=self_board[i][j];
+      oppn_piece=oppn_board[i][j];
+        // std::cout << this->player << "," << now_piece << ' ';
+      if(now_piece){
+        switch (now_piece){
+          case 1:
+           weval += pv;
+           break;
+          case 2:
+           weval += rv;
+           break;
+          case 3:
+           weval += nv;
+           break;
+          case 4:
+           weval += bv;
+           break;
+          case 5:
+           weval += qv;
+           break;
+          case 6:
+           weval += kv;
+           break;
+          default:
+           break;
         }
       }
+        
+        // std::cout << this->player << "," << now_piece << ' ';
+      if(oppn_piece){
+        switch (oppn_piece){
+          case 1:
+           beval += pv;
+           break;
+          case 2:
+           beval += rv;
+           break;
+          case 3:
+           beval += nv;
+           break;
+          case 4:
+           beval += bv;
+           break;
+          case 5:
+           beval += qv;
+           break;
+          case 6:
+           beval += kv;
+           break;
+          default:
+           break;
+        }
+      }
+    
     }
+  //std::cout << "horse" << eval;
   }
-  std::cout << "horse" << eval;
-  return eval;
+int eval = beval - weval;
+return eval;
 }
 
 
@@ -259,10 +294,6 @@ void State::get_legal_actions(){
 }
 
 
-const char piece_table[2][7][5] = {
-  {" ", "♙", "♖", "♘", "♗", "♕", "♔"},
-  {" ", "♟", "♜", "♞", "♝", "♛", "♚"}
-};
 /**
  * @brief encode the output for command line output
  * 
