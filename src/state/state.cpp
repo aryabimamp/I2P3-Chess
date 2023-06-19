@@ -38,6 +38,7 @@ int State::evaluate(){
       int now_piece=self_board[i][j];
       int oppn_piece=oppn_board[i][j];
         // std::cout << this->player << "," << now_piece << ' ';
+        // std::cout << now_piece;
       switch (now_piece){
           case 1:
            weval += pv;
@@ -87,8 +88,10 @@ int State::evaluate(){
     }
   //std::cout << "horse" << eval;
   }
+
 //int pre = this->player;
 int eval = weval - beval;
+std::cout << eval;
 return eval;
 }
 

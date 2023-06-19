@@ -27,9 +27,9 @@ int minimax(State* node, int depth, int max){
     }
     auto legal = node->legal_actions;
     
-    for(auto i : legal){
+    for(auto& i : legal){
       State* changestate = node->next_state(i);
-      Value = std::max(Value, minimax(changestate,depth-1,1));
+      Value = std::max(Value, minimax(changestate,depth-1,0));
     }
     return Value;
   }
@@ -39,9 +39,9 @@ int minimax(State* node, int depth, int max){
       node->get_legal_actions();
     }
     auto legal = node->legal_actions;
-    for(auto i : legal){
+    for(auto& i : legal){
       State* changestate = node->next_state(i);
-      Value = std::min(Value, minimax(changestate,depth-1,0));
+      Value = std::min(Value, minimax(changestate,depth-1,1));
     }
     return Value;
   }
@@ -59,7 +59,7 @@ int player = state->player;
 int w = (player==1)? 1000 : -1000;
 int ev;
 if(player==1){
-  for(auto i : actions){
+  for(auto& i : actions){
 
   State* changestate = state->next_state(i);
 
@@ -72,7 +72,7 @@ if(player==1){
 return k;
 }
 else{
-  for(auto i : actions){
+  for(auto& i : actions){
 
   State* changestate = state->next_state(i);
 
