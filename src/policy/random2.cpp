@@ -55,15 +55,14 @@ Move Random2::get_move(State *state, int depth){
   auto actions = state->legal_actions;
 
 Move k;
-int player = state->player;
-int w = (player==1)? 1000 : -1000;
+int w = (!state->player)? -1000 : 1000;
 int ev;
-if(player==1){
+if(!state->player){
   for(auto i : actions){
 
   State* changestate = state->next_state(i);
 
-  ev = minimax(changestate,depth-1,1);
+  ev = minimax(changestate,depth-1,0);
     if(ev < w){
     w = ev;
     k = i;
@@ -76,7 +75,7 @@ else{
 
   State* changestate = state->next_state(i);
 
-  ev = minimax(changestate,depth-1,0);
+  ev = minimax(changestate,depth-1,1);
    if(ev > w){
    w = ev;
    k = i;

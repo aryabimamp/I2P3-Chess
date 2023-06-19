@@ -12,17 +12,13 @@
  * @return int 
  */
 
-const char piece_table[2][7][5] = {
-  {" ", "♙", "♖", "♘", "♗", "♕", "♔"},
-  {" ", "♟", "♜", "♞", "♝", "♛", "♚"}
-};
 
 const int pv=1;
 const int rv=6;
 const int nv=7;
 const int bv=8;
 const int qv=20;
-const int kv=100;
+const int kv=1000;
 
 int State::evaluate(){
   
@@ -147,6 +143,10 @@ static const int move_table_king[8][2] = {
   {1, 1}, {1, -1}, {-1, 1}, {-1, -1},
 };
 
+const char piece_table[2][7][5] = {
+  {" ", "♙", "♖", "♘", "♗", "♕", "♔"},
+  {" ", "♟", "♜", "♞", "♝", "♛", "♚"}
+};
 
 /**
  * @brief get all legal actions of now state
