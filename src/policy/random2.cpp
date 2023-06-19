@@ -46,13 +46,13 @@ Move Random2::get_move(State *state, int depth){
   if(!state->legal_actions.size())
     state->get_legal_actions();
     
-  auto actions = state->legal_actions;
-
+auto actions = state->legal_actions;
 Move k;
 
 if(!state->player){
-  for(auto i : actions){
   int b = -1000;
+  for(auto i : actions){
+
   State* changestate = state->next_state(i);
 
   int ev = minimax(changestate,depth-1,0);
@@ -64,8 +64,9 @@ if(!state->player){
 return k;
 }
 else{
-  for(auto i : actions){
   int w = 1000;
+  for(auto i : actions){
+  
   State* changestate = state->next_state(i);
 
   int ev = minimax(changestate,depth-1,1);
