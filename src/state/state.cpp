@@ -37,7 +37,7 @@ int State::evaluate(){
         // std::cout << this->player << "," << now_piece << ' ';
         // std::cout << now_piece;
       weval += pieces[now_piece];
-      beval -= pieces[oppn_piece];
+      beval += pieces[oppn_piece];
     }
   //std::cout << "horse" << eval;
   }
