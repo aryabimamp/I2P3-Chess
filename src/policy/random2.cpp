@@ -70,8 +70,8 @@ if(player==1){
     k = i;
     }
   }
-    
 }
+return k;
 else{
   for(auto i : actions){
 
