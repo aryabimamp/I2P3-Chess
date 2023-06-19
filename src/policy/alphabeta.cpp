@@ -66,25 +66,30 @@ Move k;
 int player = state->player;
 int w = (player==1)? 1000 : -1000;
 int ev;
-for(auto i : actions){
+if(player==1){
+  for(auto i : actions){
 
   State* changestate = state->next_state(i);
 
-  if(player==1){
-    ev = abpruning(changestate,depth,0, 1000, -1000);
-    if(ev <= w){
+  ev = abpruning(changestate,depth-1,1,-1000,1000);
+    if(ev < w){
     w = ev;
     k = i;
     }
   }
-  else{
-    ev = abpruning(changestate,depth,0, -1000, 1000);
-    if(ev >= w){
-    w = ev;
-    k = i;
-    }
-  }
-
+return k;
 }
-  return k;
+else{
+  for(auto i : actions){
+
+  State* changestate = state->next_state(i);
+
+  ev = abpruning(changestate,depth-1,0,-1000,1000);
+   if(ev > w){
+   w = ev;
+   k = i;
+   }
+  }
+return k;
+}
 }
