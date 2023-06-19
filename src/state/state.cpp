@@ -60,9 +60,7 @@ int State::evaluate(){
           default:
            break;
       }
-        
         // std::cout << this->player << "," << now_piece << ' ';
-      
       switch (oppn_piece){
           case 1:
            beval += pv;
