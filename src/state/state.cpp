@@ -30,8 +30,8 @@ int State::evaluate(){
 
   int weval=0,beval=0;
 
-  auto self_board = this->board.board[this->player];
-  auto oppn_board = this->board.board[1-this->player];
+  auto self_board = this->board.board[0];
+  auto oppn_board = this->board.board[1];
   
   int now_piece, oppn_piece;
 
