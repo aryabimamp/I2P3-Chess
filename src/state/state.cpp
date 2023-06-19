@@ -23,7 +23,7 @@ const int kv=1000;
 int State::evaluate(){
   
   // [TODO] design your own evaluation function
-  int pieces[] = {0, 2, 6, 7, 8, 20, 150}
+  int pieces[] = {0, 2, 6, 7, 8, 20, 150};
   int weval=0;
   int beval=0;
 
