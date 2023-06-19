@@ -23,8 +23,8 @@ const int kv=1000;
 int State::evaluate(){
   
   // [TODO] design your own evaluation function
-  //int pieces[] = {}
-  int weval=0,beval=0;
+  int pieces[] = {0, 2, 6, 7, 8, 20, 150}
+  int eval=0;
 
   auto self_board = this->board.board[0];
   auto oppn_board = this->board.board[1];
@@ -35,59 +35,12 @@ int State::evaluate(){
       int oppn_piece=oppn_board[i][j];
         // std::cout << this->player << "," << now_piece << ' ';
         // std::cout << now_piece;
-      switch (now_piece){
-          case 1:
-           weval += pv;
-           break;
-          case 2:
-           weval += rv;
-           break;
-          case 3:
-           weval += nv;
-           break;
-          case 4:
-           weval += bv;
-           break;
-          case 5:
-           weval += qv;
-           break;
-          case 6:
-           weval += kv;
-           break;
-          default:
-           break;
-      }
-        // std::cout << this->player << "," << now_piece << ' ';
-      switch (oppn_piece){
-          case 1:
-           beval += pv;
-           break;
-          case 2:
-           beval += rv;
-           break;
-          case 3:
-           beval += nv;
-           break;
-          case 4:
-           beval += bv;
-           break;
-          case 5:
-           beval += qv;
-           break;
-          case 6:
-           beval += kv;
-           break;
-          default:
-           break;
-      }
-    
+      eval += pieces[now_piece];
+      eval -= pieces[oppn_piece];
     }
   //std::cout << "horse" << eval;
   }
 
-//int pre = this->player;
-int eval = weval - beval;
-//std::cout << eval;
 return eval;
 }
 
