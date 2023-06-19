@@ -71,7 +71,7 @@ if(player==1){
 
   State* changestate = state->next_state(i);
 
-  ev = abpruning(changestate,depth-1,1,-1000,1000);
+  ev = abpruning(changestate,depth-1,0,-1000,1000);
     if(ev < w){
     w = ev;
     k = i;
@@ -84,7 +84,7 @@ else{
 
   State* changestate = state->next_state(i);
 
-  ev = abpruning(changestate,depth-1,0,-1000,1000);
+  ev = abpruning(changestate,depth-1,1,-1000,1000);
    if(ev > w){
    w = ev;
    k = i;
