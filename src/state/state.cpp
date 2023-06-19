@@ -25,14 +25,11 @@ int State::evaluate(){
   // [TODO] design your own evaluation function
 
   int weval=0,beval=0;
-
-  auto self_board = this->board.board[0];
-  auto oppn_board = this->board.board[1];
   
   for(int i=0; i<BOARD_H; i+=1){
     for(int j=0; j<BOARD_W; j+=1){
-      int now_piece=self_board[i][j];
-      int oppn_piece=oppn_board[i][j];
+      int now_piece=board.board[0][i][j];
+      int oppn_piece=board.board[1][i][j];
         // std::cout << this->player << "," << now_piece << ' ';
         // std::cout << now_piece;
       switch (now_piece){
