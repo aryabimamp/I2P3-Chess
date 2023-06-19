@@ -71,14 +71,14 @@ for(auto i : actions){
   State* changestate = state->next_state(i);
 
   if(player==1){
-    ev = abpruning(changestate,depth,0, -1000, 1000);
+    ev = abpruning(changestate,depth,0, 1000, -1000);
     if(ev <= w){
     w = ev;
     k = i;
     }
   }
   else{
-    ev = abpruning(changestate,depth,0, 1000, -1000);
+    ev = abpruning(changestate,depth,0, -1000, 1000);
     if(ev >= w){
     w = ev;
     k = i;
