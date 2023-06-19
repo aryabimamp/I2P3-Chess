@@ -23,7 +23,7 @@ const int kv=1000;
 int State::evaluate(){
   
   // [TODO] design your own evaluation function
-  int pieces[] = {0, 2, 6, 7, 8, 20, 150}
+  int pieces[] = {0, 2, 6, 7, 8, 20, 150};
   int eval=0;
 
   auto self_board = this->board.board[0];
