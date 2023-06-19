@@ -13,7 +13,7 @@
  * @return Move 
  */
 
-int minimax(State* node, int depth, int max){
+int minimax(State* node, int depth, bool max){
 if(!node->legal_actions.size()){
       node->get_legal_actions();
   }
@@ -24,7 +24,7 @@ if(!node->legal_actions.size()){
 
   auto legal = node->legal_actions;
 
-  if(max==1){
+  if(max){
     int Value = -1000;
     for(auto i : legal){
       State* changestate = node->next_state(i);
