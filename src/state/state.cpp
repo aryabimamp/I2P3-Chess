@@ -94,7 +94,7 @@ int State::evaluate(){
     }
   //std::cout << "horse" << eval;
   }
-int pre = this->player;
+//int pre = this->player;
 int eval = weval - beval;
 return eval;
 }
