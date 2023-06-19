@@ -59,24 +59,30 @@ Move k;
 int player = state->player;
 int w = (player==1)? 1000 : -1000;
 int ev;
-for(auto i : actions){
+if(player==1){
+  for(auto i : actions){
 
   State* changestate = state->next_state(i);
 
-  ev = minimax(changestate,depth,0);
-  if(player==1){
+  ev = minimax(changestate,depth,1);
     if(ev <= w){
     w = ev;
     k = i;
     }
   }
-  else{
-    if(ev >= w){
-    w = ev;
-    k = i;
-    }
-  }
-
+    
 }
-  return k;
+else{
+  for(auto i : actions){
+
+  State* changestate = state->next_state(i);
+
+  ev = minimax(changestate,depth,0);
+   if(ev >= w){
+   w = ev;
+   k = i;
+   }
+  }
+}
+return k;
 }
