@@ -18,7 +18,7 @@ if(!node->legal_actions.size()){
       node->get_legal_actions();
   }
 
-  if(depth==0||node->legal_actions.size()){
+  if(depth==0||node->legal_actions.size()==0){
     return node->evaluate();
   }
 
