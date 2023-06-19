@@ -16,7 +16,7 @@
 int Value;
 
 int minimax(State* node, int depth, int max){
-  if(depth==0){
+  if(depth==0||node->legal_actions.size()){
     return node->evaluate();
   }
 

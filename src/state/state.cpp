@@ -91,7 +91,7 @@ int State::evaluate(){
 
 //int pre = this->player;
 int eval = weval - beval;
-std::cout << eval;
+//std::cout << eval;
 return eval;
 }
 
