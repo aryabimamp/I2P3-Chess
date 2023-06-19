@@ -33,12 +33,10 @@ int State::evaluate(){
   auto self_board = this->board.board[0];
   auto oppn_board = this->board.board[1];
   
-  int now_piece, oppn_piece;
-
   for(int i=0; i<BOARD_H; i+=1){
     for(int j=0; j<BOARD_W; j+=1){
-      now_piece=self_board[i][j];
-      oppn_piece=oppn_board[i][j];
+      int now_piece=self_board[i][j];
+      int oppn_piece=oppn_board[i][j];
         // std::cout << this->player << "," << now_piece << ' ';
       switch (now_piece){
           case 1:
