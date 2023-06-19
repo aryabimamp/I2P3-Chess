@@ -63,7 +63,7 @@ if(player==1){
 
   State* changestate = state->next_state(i);
 
-  ev = minimax(changestate,depth-1,0);
+  ev = minimax(changestate,depth-1,1);
     if(ev < w){
     w = ev;
     k = i;
@@ -76,7 +76,7 @@ else{
 
   State* changestate = state->next_state(i);
 
-  ev = minimax(changestate,depth-1,1);
+  ev = minimax(changestate,depth-1,0);
    if(ev > w){
    w = ev;
    k = i;
