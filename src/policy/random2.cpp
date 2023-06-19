@@ -14,12 +14,12 @@
  */
 
 int minimax(State* node, int depth, int max){
-  if(depth==0||node->legal_actions.size()){
-    return node->evaluate();
+if(!node->legal_actions.size()){
+      node->get_legal_actions();
   }
 
-  if(!node->legal_actions.size()){
-      node->get_legal_actions();
+  if(depth==0||node->legal_actions.size()){
+    return node->evaluate();
   }
 
   auto legal = node->legal_actions;
