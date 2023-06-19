@@ -2,7 +2,7 @@
 #include <iostream>
 
 #include "../state/state.hpp"
-#include "./random2.hpp"
+#include "./alphabeta.hpp"
 
 
 /**
@@ -13,15 +13,15 @@
  * @return Move 
  */
 
-int Value;
+int value;
 
-int minimax(State* node, int depth, int max){
+int abpruning(State* node, int depth, int max, int alpha, int beta){
   if(depth==0){
     return node->evaluate();
   }
 
   if(max==1){
-    Value = -1000;
+    value = -1000;
     if(!node->legal_actions.size()){
       node->get_legal_actions();
     }
@@ -29,39 +29,47 @@ int minimax(State* node, int depth, int max){
     
     for(auto i : legal){
       State* changestate = node->next_state(i);
-      Value = std::max(Value, minimax(changestate,depth-1,0));
+      value = std::max(value, abpruning(changestate,depth-1,0,alpha,beta));
+      alpha = std::max(alpha, value);
+      if(alpha>=beta){
+        break;
+      }
     }
-    return Value;
+    return value;
   }
 
   else if(max==0){
-    Value = 1000;
+    value = 1000;
     if(!node->legal_actions.size()){
       node->get_legal_actions();
     }
     auto legal = node->legal_actions;
     for(auto i : legal){
       State* changestate = node->next_state(i);
-      Value = std::min(Value, minimax(changestate,depth-1,1));
+      value = std::min(value, abpruning(changestate,depth-1,1,alpha,beta));
+      beta = std::min(beta, value);
+      if(beta<=alpha){
+        break;
+      }
     }
-    return Value;
+    return value;
   }
 
 }
 
-Move Random2::get_move(State *state, int depth){
+Move Alphabeta::get_move(State *state, int depth){
   if(!state->legal_actions.size())
     state->get_legal_actions();
     
   auto actions = state->legal_actions;
-
 Move k;
 int w = -100;
 int ev;
 for(auto i : actions){
+  
   State* changestate = state->next_state(i);
 
-  ev = minimax(changestate,depth,0);
+  ev = abpruning(changestate,depth,0, -1000, 1000);
 
   if(ev >= w){
     w = ev;

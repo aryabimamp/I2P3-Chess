@@ -30,8 +30,8 @@ int State::evaluate(){
 
   int weval=0,beval=0;
 
-  auto self_board = this->board.board[0];
-  auto oppn_board = this->board.board[1];
+  auto self_board = this->board.board[this->player];
+  auto oppn_board = this->board.board[1-this->player];
   
   int now_piece, oppn_piece;
 
@@ -94,6 +94,7 @@ int State::evaluate(){
     }
   //std::cout << "horse" << eval;
   }
+int pre = this->player;
 int eval = beval - weval;
 return eval;
 }
