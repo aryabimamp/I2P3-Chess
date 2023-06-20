@@ -14,7 +14,7 @@
  */
 
 int minimax(State* node, int depth, bool max){
-if(!node->legal_actions.size()){
+  if(!node->legal_actions.size()){
       node->get_legal_actions();
   }
 
@@ -23,19 +23,18 @@ if(!node->legal_actions.size()){
   }
 
   auto legal = node->legal_actions;
+  int Value = (max) ? -1000 : 1000;
 
   if(max){
-    int Value = -1000;
-    for(auto i : legal){
-      State* changestate = node->next_state(i);
+    for(auto moves : legal){
+      State* changestate = node->next_state(moves);
       Value = std::max(Value, minimax(changestate,depth-1,0));
     }
     return Value;
   }
   else{
-    int Value = 1000;
-    for(auto i : legal){
-      State* changestate = node->next_state(i);
+    for(auto moves : legal){
+      State* changestate = node->next_state(moves);
       Value = std::min(Value, minimax(changestate,depth-1,1));
     }
     return Value;
@@ -49,30 +48,30 @@ Move Random2::get_move(State *state, int depth){
 auto actions = state->legal_actions;
 Move k;
 
+int whiteorblack = (!state->player) ? -1000 : 1000;
+
 if(!state->player){
-  int b = -1000;
-  for(auto i : actions){
+  for(auto moves : actions){
 
-  State* changestate = state->next_state(i);
+  State* changestate = state->next_state(moves);
 
-  int ev = minimax(changestate,depth-1,0);
-    if(ev > b){
-    b = ev;
-    k = i;
+  int eval = minimax(changestate,depth-1,0);
+    if(eval > whiteorblack){
+    whiteorblack = eval;
+    k = moves;
     }
   }
 return k;
 }
 else{
-  int w = 1000;
-  for(auto i : actions){
+  for(auto moves : actions){
   
-  State* changestate = state->next_state(i);
+  State* changestate = state->next_state(moves);
 
-  int ev = minimax(changestate,depth-1,1);
-   if(ev < w){
-   w = ev;
-   k = i;
+  int eval = minimax(changestate,depth-1,1);
+   if(eval < whiteorblack){
+   whiteorblack = eval;
+   k = moves;
    }
   }
 return k;
