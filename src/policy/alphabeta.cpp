@@ -34,7 +34,7 @@ int abpruning(State* node, int depth, int max, int alpha, int beta){
         break;
       }
     }
-    return alpha;
+    return value;
   }
   else{
     for(auto moves : legal){
@@ -45,7 +45,7 @@ int abpruning(State* node, int depth, int max, int alpha, int beta){
         break;
       }
     }
-    return beta;
+    return value;
   }
 
 }
