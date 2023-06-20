@@ -12,18 +12,17 @@
  * @return int 
  */
 
-/*
+
 const int pv=2;
 const int rv=6;
 const int nv=7;
 const int bv=8;
 const int qv=20;
 const int kv=1000;
-*/
+
 int State::evaluate(){
   
   // [TODO] design your own evaluation function
-  int pieces[] = {0, 2, 6, 7, 8, 20, 150};
   int weval=0;
   int beval=0;
 
