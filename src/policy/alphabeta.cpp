@@ -30,7 +30,7 @@ int abpruning(State* node, int depth, int max, int alpha, int beta){
       State* changestate = node->next_state(moves);
       value = std::max(value, abpruning(changestate,depth-1,0,alpha,beta));
       alpha = std::max(alpha, value);
-      if(alpha>beta){
+      if(alpha>=beta){
         break;
       }
     }
@@ -40,7 +40,8 @@ int abpruning(State* node, int depth, int max, int alpha, int beta){
     for(auto moves : legal){
       State* changestate = node->next_state(moves);
       value = std::min(value, abpruning(changestate,depth-1,1,alpha,beta));
-      if(alpha<beta){
+      beta = std::max(beta, value);
+      if(alpha>=beta){
         break;
       }
     }
