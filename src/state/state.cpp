@@ -36,8 +36,50 @@ int State::evaluate(){
       int oppn_piece=oppn_board[i][j];
         // std::cout << this->player << "," << now_piece << ' ';
         // std::cout << now_piece;
-      weval += pieces[now_piece];
-      beval += pieces[oppn_piece];
+        switch (now_piece){
+          case 1:
+           weval += pv;
+           break;
+          case 2:
+           weval += rv;
+           break;
+          case 3:
+           weval += nv;
+           break;
+          case 4:
+           weval += bv;
+           break;
+          case 5:
+           weval += qv;
+           break;
+          case 6:
+           weval += kv;
+           break;
+          default:
+           break;
+        }
+        switch (oppn_piece){
+          case 1:
+           beval += pv;
+           break;
+          case 2:
+           beval += rv;
+           break;
+          case 3:
+           beval += nv;
+           break;
+          case 4:
+           beval += bv;
+           break;
+          case 5:
+           beval += qv;
+           break;
+          case 6:
+           beval += kv;
+           break;
+          default:
+           break;
+        }
     }
   //std::cout << "horse" << eval;
   }
