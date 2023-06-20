@@ -56,14 +56,16 @@ Move Alphabeta::get_move(State *state, int depth){
     
 auto actions = state->legal_actions;
 Move k;
+
 int whiteorblack = (!state->player) ? -1000 : 1000;
 
 if(!state->player){
   for(auto moves : actions){
 
   State* changestate = state->next_state(moves);
-
+  
   int eval = abpruning(changestate,depth-1,0,-1000,1000);
+
     if(eval > whiteorblack){
     whiteorblack = eval;
     k = moves;
@@ -77,6 +79,7 @@ else{
   State* changestate = state->next_state(moves);
 
   int eval = abpruning(changestate,depth-1,1,-1000,1000);
+
    if(eval < whiteorblack){
    whiteorblack = eval;
    k = moves;
